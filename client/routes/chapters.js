@@ -11,6 +11,7 @@ Router.map(function () {
       } else {
         this.render('chapterPremium');
       }
+
     },
     data: function () {
       return Chapters.findOne({chapterNumber: this.params.chapterNumber});

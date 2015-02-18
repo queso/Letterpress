@@ -25,7 +25,6 @@
   function _initFakeInbox () {
     _fakeInboxCollection.remove({});
     Email.send = function (options) {
-      console.log('inserted email');
       _fakeInboxCollection.insert(options);
     };
     _createJsonServerRoute('fake/inbox', function () {

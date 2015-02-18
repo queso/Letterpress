@@ -18,11 +18,7 @@
     });
 
 
-
-
     this.Given(/^I am authenticated$/, function (callback) {
-
-
       // do the login process
       helper.world.browser.
         waitForExist('#login-buttons-twitter').
@@ -33,30 +29,9 @@
         waitForExist('.login-display-name').
         saveScreenshot(process.env.PWD + '/auth3.png').
         call(callback);
-
-      // wait for the login to complete
-
-      //.call(callback)
-
     });
 
 
-
-
-    //
-    //  this.Given(/^I am authenticated$/, function (callback) {
-    //
-    //    helper.world.browser.
-    //      waitForExist('#login-buttons-twitter').
-    //      waitForVisible('#login-buttons-twitter').
-    //      saveScreenshot(process.env.PWD + '/auth1.png').
-    //      click('#login-buttons-twitter').
-    //      saveScreenshot(process.env.PWD + '/auth2.png').
-    //      waitForExist('.login-display-name').
-    //      saveScreenshot(process.env.PWD + '/auth3.png').
-    //      call(callback)
-    //  });
-    //
   };
 
 })();

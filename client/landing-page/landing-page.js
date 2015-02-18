@@ -27,6 +27,10 @@ Template.chaptersPreview.helpers({
 
 Template.newsletter.events({
   'click button#submitNewsletterEmail': function () {
-    Meteor.call('newsletterSignup', $('input#newsletterEmail').val());
+    Meteor.call('newsletterSignup', $('input#newsletterEmail').val(), function(err) {
+      if (!err) {
+        $('.newsletter-confirmation').show();
+      }
+    });
   }
 });

@@ -10,16 +10,18 @@ Feature: Authorable Landing Page
     When I navigate to the landing page
     Then I see the heading "Letterpress by Xolv.io"
 
-  Scenario: Visitors can sign up for the email list
-    Given I navigate to the landing page
-    When I sign up for the newsletter with "me@example.com"
-    Then I receive a confirmation email from "letterpress@xolv.io"
-
   Scenario: Visitors can see chapter descriptions
     Given I have entered chapter preview descriptions
     When I navigate to the landing page
     Then I see the chapters descriptions in the preview section
     And the chapters are in order
+
+  Scenario: Visitors can sign up for the email list
+    Given I navigate to the landing page
+    And I do not a see a notification saying "You are on the list!"
+    When I sign up for the newsletter with "me@example.com"
+    Then I receive a confirmation email from "letterpress@xolv.io"
+    And I see a notification saying "You are on the list!"
 
   Scenario: Visitors can click through to a chapter preview
     Given I navigate to the landing page

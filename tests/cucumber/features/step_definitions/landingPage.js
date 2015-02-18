@@ -41,7 +41,7 @@
     });
 
 
-    this.Then(/^I receive a confirmation email from "([^"]*)"$/, function (fromEmailAddress, callback) {
+    this.Then(/^I receive a confirmation email from "([^"]*)"$/, Meteor.bindEnvironment(function (fromEmailAddress, callback) {
       var HTTP = Package['http'].HTTP;
       var sentEmail = HTTP.get(helper.world.mirrorUrl + 'fake/inbox').data[0];
       try {
@@ -51,7 +51,26 @@
       } catch (e) {
         callback.fail(e);
       }
+    }));
+
+
+    this.Given(/^I do not a see a notification saying "([^"]*)"$/, function (expectedMessage, callback) {
+      helper.world.browser.
+        getText('.newsletter-confirmation', function (error, actualMessage) {
+          assert.equal(actualMessage, "");
+          callback();
+        });
     });
+
+    this.Then(/^I see a notification saying "([^"]*)"$/, function (expectedMessage, callback) {
+      helper.world.browser.
+        getText('.newsletter-confirmation', function (error, actualMessage) {
+          assert.equal(actualMessage, expectedMessage);
+          callback();
+        });
+    });
+
+
 
 
     this.Given(/^I have entered chapter preview descriptions$/, function (callback) {
@@ -74,7 +93,6 @@
         });
     });
 
-
     this.When(/^I click on the chapter link$/, function (callback) {
       // Write code here that turns the phrase above into concrete actions
       helper.world.browser.
@@ -84,8 +102,8 @@
 
     this.Then(/^I should be at the chapter preview page$/, function (callback) {
       helper.world.browser.
-        url(function(err, url) {
-          assert.equal(url.value, helper.world.mirrorUrl + "chapter/1" )
+        url(function (err, url) {
+          assert.equal(url.value, helper.world.mirrorUrl + "chapter/1")
           callback();
         });
     });

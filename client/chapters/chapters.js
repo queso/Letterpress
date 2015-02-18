@@ -3,10 +3,3 @@ Template.chapters.helpers({
     return Chapters.find({}, {sort: {chapterNumber: 1}});
   }
 });
-
-Template.chapterPremium.helpers({
-  'chapter': function () {
-    console.log(this);
-    return this;
-  }
-});

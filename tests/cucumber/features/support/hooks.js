@@ -6,13 +6,12 @@
 
     var helper = this;
 
-    this.Before(function () {
+    this.Before(Meteor.bindEnvironment(function () {
+
       var world = helper.world;
-      var callback = arguments[arguments.length - 1];
+      var next = arguments[arguments.length - 1];
 
-      var connection = DDP.connect(helper.world.mirrorUrl);
-      connection.call('clearState', function () {
-
+      var boundCallback = function () {
         world.browser.
           init().
           setViewportSize({
@@ -20,10 +19,13 @@
             height: 1024
           }).
           timeoutsImplicitWait(1000).
-          call(callback);
+          call(next);
+      };
 
-      });
-    });
+      var connection = DDP.connect(helper.world.mirrorUrl);
+      connection.call('clearState', boundCallback);
+
+    }));
 
     this.After(function () {
       var world = helper.world;
