@@ -44,6 +44,7 @@
     this.Then(/^I receive a confirmation email from "([^"]*)"$/, function (fromEmailAddress, callback) {
       var HTTP = Package['http'].HTTP;
       try {
+        console.log("Mirror URL: " + helper.world.mirrorUrl);
         var sentEmail = HTTP.get(helper.world.mirrorUrl + 'fake/inbox').data[0];
         assert.equal(sentEmail.to, helper.world.users['I'].emailAddress);
         assert.equal(fromEmailAddress, sentEmail.from);
@@ -85,7 +86,7 @@
     this.Then(/^I should be at the chapter preview page$/, function (callback) {
       helper.world.browser.
         url(function(err, url) {
-          assert.equal(url.value, helper.world.mirrorUrl + "chapter/1" )
+          assert.equal(url.value, helper.world.mirrorUrl + "chapter/1" );
           callback();
         });
     });
