@@ -1,6 +1,8 @@
 Letterpress by Xolv.io
 ======================
 
+[![Build Status](https://travis-ci.org/queso/Letterpress.svg)](https://travis-ci.org/queso/Letterpress)
+
 Letterpress allows you to write and publish your own book online with a pretty live-preview
 WYSIWYG Markdown editor.
 
